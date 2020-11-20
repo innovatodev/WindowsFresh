@@ -3135,7 +3135,10 @@ Function HideEditWithPaint3DContext
 	$Extensions = @(".bmp", ".gif", ".jpe", ".jpeg", ".jpg", ".png", ".tif", ".tiff")
 	foreach ($extension in $extensions)
 	{
+		if ((Test-Path -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit"))
+		{
 		New-ItemProperty -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+		}
 	}
 }
 # Show the "Edit with Paint 3D" item from the context menu
@@ -3143,9 +3146,12 @@ Function ShowEditWithPaint3DContext
 {
 	Write-Output "ShowEditWithPaint3DContext"
 	$Extensions = @(".bmp", ".gif", ".jpe", ".jpeg", ".jpg", ".png", ".tif", ".tiff")
-	foreach ($Extension in $Extensions)
+	foreach ($Extension in $Extensions)	
 	{
+		if ((Test-Path -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit"))
+		{
 		Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+		}
 	}
 }
 # Hide the "Edit with Photos" item from the context menu
