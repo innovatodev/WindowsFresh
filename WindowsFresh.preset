@@ -8,15 +8,15 @@ DisableTasks
 DisableFeatures
 DisableCapabilities
 RemoveStartup
-UnpinStartMenu
-DisableCortana #EnableCortana
-DisableOneDrive #EnableOneDrive
-UninstallOneDrive #InstallOneDrive
-UninstallWindowsStore #InstallWindowsStore
-UninstallWindowsPhotos #InstallWindowsPhotos
-UninstallWindowsCamera #InstallWindowsCamera
-UninstallWindowsCalculator #InstallWindowsCalculator
-DisableXboxFeatures #EnableXboxFeatures
+#UnpinStartMenu
+#DisableCortana #EnableCortana
+#DisableOneDrive #EnableOneDrive
+#UninstallOneDrive #InstallOneDrive
+#UninstallWindowsStore #InstallWindowsStore
+#UninstallWindowsPhotos #InstallWindowsPhotos
+#UninstallWindowsCamera #InstallWindowsCamera
+#UninstallWindowsCalculator #InstallWindowsCalculator
+#DisableXboxFeatures #EnableXboxFeatures
 
 ### SECURITY ###
 #SetUACHigh #SetUACLow

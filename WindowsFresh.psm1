@@ -32,7 +32,7 @@ Function DisableServices
 Function DisableTasks
 {
 	Write-Output "DisableTasks"
-	$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|Microsoft-Windows-DiskDiagnosticDataCollector|GatherNetworkInfo|Edge|OneDrive"
+	$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|Microsoft-Windows-DiskDiagnosticDataCollector|GatherNetworkInfo|Edge|OneDrive|XblGameSaveTask"
 	Get-ScheduledTask | Where-Object { $_.TaskName -Match $BLACKLIST } | Where-Object { $_.State -notlike 'Disabled' } | Disable-ScheduledTask | Out-Null
 }
 # Disable features with blacklist
