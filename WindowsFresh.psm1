@@ -165,7 +165,7 @@ Function InstallOneDrive
 	}
 	Start-Process $onedrive -NoNewWindow
 }
-# Uninstall EdgeChromium (NOT RECOMMENDED)
+# Uninstall EdgeChromium (NOT RECOMMENDED AND NOT CLEAN)
 Function UninstallEdgeChromium
 {	
 	Write-Output "UninstallEdgeChromium"
