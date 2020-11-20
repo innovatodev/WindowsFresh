@@ -36,7 +36,7 @@ Disable privacy related tasks, auto updates tasks, diagnostics tasks, blacklist 
 
 - ### __Remove Startup Entries (BLACKLIST)__
 
-Remove blacklisted startup entries, blacklist can be customized as well.
+Remove blacklisted Startup Entries, blacklist can be customized as well.
 
 - ### __Tweak the Windows (PRESET)__
 
