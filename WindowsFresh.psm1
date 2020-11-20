@@ -72,7 +72,7 @@ function RemoveStartup
 				If ($ENTRY.ShouldDisable)
 				{
 					Write-Output $ENTRY.Path $ENTRY.Name
-					Remove-ItemProperty -Path $ENTRY.Path -Name $ENTRY.Name 
+					Remove-ItemProperty -Path $ENTRY.Path -Name $ENTRY.Name | Out-Null
 				}
 			}
 		}
