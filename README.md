@@ -45,17 +45,20 @@ Feels free to help on the project there just a single rule : Tweaks need to have
 
 
 
+You have choice to keep essentials Windows Apps :
 
+![Image](https://github.com/innovatodev/WindowsFresh/blob/master/IMG/2.png)
 
-
-
-
-
-
-
-After a full clean preset, windows can looks like this :
+Or remove everything you dont need :
 
 ![Image](https://github.com/innovatodev/WindowsFresh/blob/master/IMG/1.png)
+
+By default, Windows defender will protect you :
+
+![Image](https://github.com/innovatodev/WindowsFresh/blob/master/IMG/3.png)
+
+
+
 
 
 Most of the tweaks are taken from :
