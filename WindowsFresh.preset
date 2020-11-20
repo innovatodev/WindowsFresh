@@ -56,7 +56,6 @@ DisableUWPVoiceActivation #EnableUWPVoiceActivation
 DisableUWPVoiceActivation #EnableUWPVoiceActivation
 DisableUWPNotifications #EnableUWPNotifications
 DisableUWPAccountInfo #EnableUWPAccountInfo
-DisableUWPAccountInfo #EnableUWPAccountInfo
 DisableUWPContacts #EnableUWPContacts
 DisableUWPCalendar #EnableUWPCalendar
 DisableUWPPhoneCalls #EnableUWPPhoneCalls
