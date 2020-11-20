@@ -3,6 +3,8 @@ PowerShell Script for automated Windows 10 configuration.
 
 It is recommended to run on a fresh Windows installation, not really mandatory but it could cause some problems if current install is already tweaked by other methods.
 
+Do no support old Windows versions and LTSC versions, this script will works perfectly only on last Windows version (Actually Windows 10 20H2)
+
 1-Uninstall UWP Apps (WHITELIST)
 
 Remove all UWP bloat by default, the whitelist can be customized as well and most used UWP Apps like Camera, Photos, Calculator and Microsoft Store are not uninstalled by default, they are in the tweak preset file.

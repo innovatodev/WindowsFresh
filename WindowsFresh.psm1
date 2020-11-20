@@ -3158,63 +3158,71 @@ Function ShowEditWithPaint3DContext
 Function HideEditWithPhotosContext
 {
 	Write-Output "HideEditWithPhotosContext"
-	if ((Test-Path -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit"))
+	if ((Test-Path -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit"))
 	{
-	New-ItemProperty -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
 	}
 }
 # Show the "Edit with Photos" item from the context menu
 Function ShowEditWithPhotosContext
 {
 	Write-Output "ShowEditWithPhotosContext"
-	if ((Test-Path -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit"))
+	if ((Test-Path -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit"))
 	{
-	Remove-ItemProperty -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 }
 # Hide the "Create a new video" item from the context menu
 Function HideCreateANewVideoContext
 {
 	Write-Output "HideCreateANewVideoContext"
-	if ((Test-Path -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo"))
+	if ((Test-Path -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo"))
 	{
-	New-ItemProperty -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
 	}
 }
 # Show the "Create a new video" item from the context menu
 Function ShowCreateANewVideoContext
 {
 	Write-Output "ShowCreateANewVideoContext"
-	if ((Test-Path -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo"))
+	if ((Test-Path -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo"))
 	{
-	Remove-ItemProperty -Path "HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellCreateVideo" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 }
 # Hide the "Edit" item from the images context menu
 Function HideImagesEditContext
 {
 	Write-Output "HideImagesEditContext"
-	New-ItemProperty -Path "HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\edit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
 }
 # Show the "Edit" item from the images context menu
 Function ShowImagesEditContext
 {
 	Write-Output "ShowImagesEditContext"
-	Remove-ItemProperty -Path "HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\edit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 # Hide the "Print" item from the .bat and .cmd context menu
 Function HidePrintCMDContext
 {
 	Write-Output "HidePrintCMDContext"
-	New-ItemProperty -Path "HKEY_CLASSES_ROOT\batfile\shell\print" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path "HKEY_CLASSES_ROOT\cmdfile\shell\print" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	if ((Test-Path -Path "HKCR:\batfile\shell\print"))
+	{
+		New-ItemProperty -Path "HKCR:\batfile\shell\print" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	}
+	if ((Test-Path -Path "HKCR:\cmdfile\shell\print"))
+	{
+		New-ItemProperty -Path "HKCR:\cmdfile\shell\print" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	}
+
+
 }
 # Show the "Print" item from the .bat and .cmd context menu
 Function ShowPrintCMDContext
 {
 	Write-Output "ShowPrintCMDContext"
-	Remove-ItemProperty -Path "HKEY_CLASSES_ROOT\batfile\shell\print" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path "HKEY_CLASSES_ROOT\cmdfile\shell\print" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\batfile\shell\print" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\cmdfile\shell\print" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 # Hide the "Send to" item from the folders context menu
 Function HideSendToContext
