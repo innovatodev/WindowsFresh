@@ -65,13 +65,13 @@ By default, Windows Defender will protect you :
 
 
 
-Most of the tweaks are taken from :
+Thanks to :
 
 https://github.com/Disassembler0/Win10-Initial-Setup-Script
 
 https://github.com/farag2/Windows-10-Sophia-Script
 
-And added a lot myself too.
+Lot of tweaks are taken from here, i added/modified a lot but a big part are from these two repositories
 
 
 
