@@ -6,14 +6,14 @@ DisableTasks
 DisableFeatures
 DisableCapabilities
 UnpinStartMenu
-DisableCortana #EnableCortana
-DisableOneDrive #EnableOneDrive
-UninstallOneDrive #InstallOneDrive
+#DisableCortana #EnableCortana
+#DisableOneDrive #EnableOneDrive
+#UninstallOneDrive #InstallOneDrive
 ###################UninstallEdgeChromium #NOT RECOMMENDED AND NOT CLEAN
-UninstallWindowsStore #InstallWindowsStore
-UninstallWindowsPhotos #InstallWindowsPhotos
-UninstallWindowsCamera #InstallWindowsCamera
-UninstallWindowsCalculator #InstallWindowsCalculator
+#UninstallWindowsStore #InstallWindowsStore
+#UninstallWindowsPhotos #InstallWindowsPhotos
+#UninstallWindowsCamera #InstallWindowsCamera
+#UninstallWindowsCalculator #InstallWindowsCalculator
 DisableXboxFeatures #EnableXboxFeatures
 HideDesktopInThisPC #ShowDesktopInThisPC
 HideDocumentsInThisPC #ShowDocumentsInThisPC
@@ -201,7 +201,7 @@ HideEditWithPhotosContext #ShowEditWithPhotosContext
 HideCreateANewVideoContext #ShowCreateANewVideoContext
 ShowImagesEditContext #HideImagesEditContext
 HidePrintCMDContext #ShowPrintCMDContext
-HideSendToContext #ShowSendToContext
+ShowSendToContext #HideSendToContext
 HideBitLockerContext #ShowBitLockerContext
 HideBitmapNewContext #ShowBitmapNewContext
 RemoveCompatibillityContext #AddCompatibillityContext 
