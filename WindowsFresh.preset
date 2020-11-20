@@ -9,7 +9,7 @@ UnpinStartMenu
 DisableCortana #EnableCortana
 DisableOneDrive #EnableOneDrive
 UninstallOneDrive #InstallOneDrive
-UninstallEdgeChromium #NOT RECOMMENDED AND NOT CLEAN
+###################UninstallEdgeChromium #NOT RECOMMENDED AND NOT CLEAN
 UninstallWindowsStore #InstallWindowsStore
 UninstallWindowsPhotos #InstallWindowsPhotos
 UninstallWindowsCamera #InstallWindowsCamera
