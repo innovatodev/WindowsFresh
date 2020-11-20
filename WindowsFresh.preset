@@ -11,27 +11,27 @@ UnpinStartMenu
 DisableCortana #EnableCortana
 DisableOneDrive #EnableOneDrive
 UninstallOneDrive #InstallOneDrive
-UninstallWindowsStore #InstallWindowsStore
-UninstallWindowsPhotos #InstallWindowsPhotos
-UninstallWindowsCamera #InstallWindowsCamera
-UninstallWindowsCalculator #InstallWindowsCalculator
+#UninstallWindowsStore #InstallWindowsStore
+#UninstallWindowsPhotos #InstallWindowsPhotos
+#UninstallWindowsCamera #InstallWindowsCamera
+#UninstallWindowsCalculator #InstallWindowsCalculator
 DisableXboxFeatures #EnableXboxFeatures
 
 ### SECURITY ###
 SetUACHigh #SetUACLow
-DisableDefenderCloud #EnableDefenderCloud
-DisableDefenderAppGuard #EnableDefenderAppGuard
+#DisableDefenderCloud #EnableDefenderCloud
+#DisableDefenderAppGuard #EnableDefenderAppGuard
 HideAccountProtectionWarn #ShowAccountProtectionWarn
-DisableDownloadBlocking #EnableDownloadBlocking
-EnableScriptHost #DisableScriptHost
+#DisableDownloadBlocking #EnableDownloadBlocking
+#EnableScriptHost #DisableScriptHost
 EnableFirewall #DisableFirewall
-DisableSmartScreen #EnableSmartScreen
-DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
-DisablePUAppsDetection #EnablePUAppsDetection
-DisableDefenderSandbox #EnableDefenderSandbox
-SetDEPOptIn #SetDEPOptOut
+#DisableSmartScreen #EnableSmartScreen
+#DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
+#DisablePUAppsDetection #EnablePUAppsDetection
+#DisableDefenderSandbox #EnableDefenderSandbox
+#SetDEPOptIn #SetDEPOptOut
 FirewallDeleteAllRules
-HideDefenderTrayIcon #ShowDefenderTrayIcon
+#HideDefenderTrayIcon #ShowDefenderTrayIcon
 DisableMediaSharing #EnableMediaSharing
 DisableMediaOnlineAccess #EnableMediaOnlineAccess
 EnableRestorePoints #DisableRestorePoints
