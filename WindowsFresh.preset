@@ -92,6 +92,7 @@ DisableSharedExperiences #EnableSharedExperiences
 DisableClipboardHistory #EnableClipboardHistory
 DisableSharingMappedDrives #EnableSharingMappedDrives
 DisableAdminShares #EnableAdminShares
+BlockMicrosoftAccount #AllowMicrosoftAccount
 
 ### UI & PERSONALIZATION ###
 HideDesktopInThisPC #ShowDesktopInThisPC
@@ -242,5 +243,4 @@ DisableConnectionSharing #EnableConnectionSharing
 DisableRemoteAssistance #EnableRemoteAssistance
 DisableRemoteDesktop #EnableRemoteDesktop
 
-###################UninstallEdgeChromium #NOT RECOMMENDED AND NOT CLEAN
 WaitForKey

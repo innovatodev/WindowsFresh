@@ -165,13 +165,6 @@ Function InstallOneDrive
 	}
 	Start-Process $onedrive -NoNewWindow
 }
-# Uninstall EdgeChromium (NOT RECOMMENDED AND NOT CLEAN)
-Function UninstallEdgeChromium
-{	
-	Write-Output "UninstallEdgeChromium"
-	$edge = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\8*\Installer\setup.exe"
-	Start-Process $edge "-uninstall -system-level -verbose-logging -force-uninstall" -NoNewWindow -Wait
-}
 # Uninstall Windows Store
 Function UninstallWindowsStore
 {
@@ -3630,6 +3623,27 @@ Function FirewallDeleteAllRules
 {
 	Write-Output "FirewallDeleteAllRules"
 	Remove-NetFirewallRule  | Out-Null
+}
+# Do not allow users to connect a microsoft account & allow apps to launch without microsoft account
+Function BlockMicrosoftAccount
+{
+	Write-Output "BlockMicrosoftAccount"
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Name "DisableUserAuth" -Type DWord -Value 0 | Out-Null
+	
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\System")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\System" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\System" -Name "MSAOptional" -Type DWord -Value 1 | Out-Null
+}
+# Allow users to connect a microsoft account & Do not allow apps to launch without microsoft account
+Function AllowMicrosoftAccount
+{
+	Write-Output "AllowMicrosoftAccount"
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Name "DisableUserAuth" -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\System" -Name "MSAOptional" -ErrorAction SilentlyContinue | Out-Null
 }
 Function WaitForKey
 {
