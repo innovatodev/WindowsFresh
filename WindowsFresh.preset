@@ -47,6 +47,7 @@ DisableUpdateRestartNotification #EnableUpdateRestartNotification
 SetP2PUpdateDisable #SetP2PUpdateInternet #SetP2PUpdateLocal
 DisableDeviceRestartAfterUpdate #EnableDeviceRestartAfterUpdate
 DisableSmartActiveHours #EnableSmartActiveHours
+DisableStoreUpdates #EnableStoreUpdates
 
 ### PRIVACY ###
 DisableTelemetry #EnableTelemetry

@@ -3047,6 +3047,21 @@ Function EnableSmartActiveHours
 	Write-Output "EnableSmartActiveHours"
 	New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name "SmartActiveHoursState" -PropertyType DWord -Value 1 -Force | Out-Null
 }
+# Disable Microsoft Store automatic updates
+Function DisableStoreUpdates
+{
+	Write-Output "DisableStoreUpdates"
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "AutoDownload" -Type DWord -Value 2 | Out-Null
+}
+# Enable Microsoft Store automatic updates
+Function EnableStoreUpdates
+{
+	Write-Output "EnableStoreUpdates"
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "AutoDownload" -ErrorAction SilentlyContinue | Out-Null
+}
 # Disable restarting this device as soon as possible when a restart is required to install an update
 Function DisableDeviceRestartAfterUpdate
 {
