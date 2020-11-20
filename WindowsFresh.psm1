@@ -172,6 +172,7 @@ Function UninstallEdgeChromium
 	$edge = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\8*\Installer\setup.exe"
 	Start-Process $edge "-uninstall -system-level -verbose-logging -force-uninstall" -NoNewWindow -Wait
 }
+# Uninstall Windows Store
 Function UninstallWindowsStore
 {
 	Write-Output "UninstallWindowsStore"
@@ -3648,7 +3649,6 @@ Function FirewallDeleteAllRules
 	Write-Output "FirewallDeleteAllRules"
 	Remove-NetFirewallRule  | Out-Null
 }
-# Uninstall Windows Store
 Function WaitForKey
 {
 	Write-Output "Press any key to continue"
