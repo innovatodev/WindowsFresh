@@ -59,7 +59,7 @@ function RemoveStartup
 		"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
 		#"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
 		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+		#"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
 	) | Where-Object ValueCount -ne 0 |
 		ForEach-Object {
 			foreach ($name in $_.GetValueNames()) {
