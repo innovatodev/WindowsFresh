@@ -18,41 +18,96 @@ If (!(Test-Path "HKCR:")) {
 Function UninstallUWP
 {
 	Write-Output "UninstallUWP"
-	$WHITELIST = "549981C3F5F10|Windows.Photos|WindowsCalculator|WindowsCamera|GamingApp|GamingServices|Xbox|DesktopAppInstaller|StorePurchaseApp|WindowsStore|WebMediaExtensions|Nvidia|IntelGraphics|Nahimic|AdvancedMicroDevicesInc|Realtek"
+	$WHITELIST = (@(
+		"549981C3F5F10"
+		"Windows.Photo"
+		"WindowsCalculator"
+		"WindowsCamera"
+		"GamingApp"
+		"GamingServices"
+		"Xbox"
+		"DesktopAppInstaller"
+		"StorePurchaseApp"
+		"WindowsStore"
+		"WebMediaExtensions"
+		"Nvidia"
+		"IntelGraphics"
+		"Nahimic"
+		"AdvancedMicroDevicesInc"
+		"Realtek"
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-AppxPackage -PackageTypeFilter Bundle | Where-Object { $_.Name -NotMatch $WHITELIST } | Where-Object { $_.NonRemovable -notlike 'True' } | Remove-AppxPackage | Out-Null
 }
 # Disable services with blacklist
 Function DisableServices
 {
 	Write-Output "DisableServices"
-	$BLACKLIST = "RemoteAccess|RemoteRegistry|WSearch"
+	$BLACKLIST = (@(
+		"RemoteAccess"
+		"RemoteRegistry"	
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
     Get-Service | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.StartType -notlike 'Disabled' } | Set-Service -StartupType Disabled | Out-Null
 }
 # Disable tasks with blacklist
 Function DisableTasks
 {
 	Write-Output "DisableTasks"
-	$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|Microsoft-Windows-DiskDiagnosticDataCollector|GatherNetworkInfo|Edge|OneDrive|XblGameSaveTask"
+	$BLACKLIST = (@(
+		"Microsoft Compatibility Appraiser"
+		"Proxy"	
+		"Consolidator"
+		"Microsoft-Windows-DiskDiagnosticDataCollector"
+		"GatherNetworkInfo"
+		"Edge"
+		"OneDrive"
+		"XblGameSaveTask"
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-ScheduledTask | Where-Object { $_.TaskName -Match $BLACKLIST } | Where-Object { $_.State -notlike 'Disabled' } | Disable-ScheduledTask | Out-Null
 }
 # Disable features with blacklist
 Function DisableFeatures
 {
 	Write-Output "DisableFeatures"
-	$BLACKLIST = "Printing|SearchEngine|MSRDC-Infrastructure|WCF-Services45|WCF-TCP-PortSharing45|MediaPlayback|WindowsMediaPlayer|SmbDirect|Internet-Explorer|WorkFolders|PowerShellV2"
+	$BLACKLIST = (@(
+		"Printing"
+		"SearchEngine"	
+		"MSRDC-Infrastructure"
+		"WCF-Services45"
+		"WCF-TCP-PortSharing45"
+		"MediaPlayback"
+		"WindowsMediaPlayer"
+		"SmbDirect"
+		"Internet-Explorer"
+		"WorkFolders"
+		"PowerShellV2"
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -Match $BLACKLIST }  | Where-Object { $_.State -like 'Enabled' } | Disable-WindowsOptionalFeature -Online -NoRestart | Out-Null
 }
 # Disable Capabilities with blacklist
 Function DisableCapabilities
 {
 	Write-Output "DisableCapabilities"
-	$BLACKLIST = "StepsRecorder|QuickAssist|InternetExplorer|Hello.Face|MathRecognizer|WindowsMediaPlayer|WordPad|OneSync|OpenSSH|Print"
+	$BLACKLIST = (@(
+		"StepsRecorder"
+		"QuickAssist"
+		"InternetExplorer"	
+		"Hello.Face"
+		"MathRecognizer"
+		"WindowsMediaPlayer"
+		"WordPad"
+		"OneSync"
+		"OpenSSH"
+        "Print"
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-WindowsCapability -Online | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.State -like 'Installed' } | Remove-WindowsCapability -Online | Out-Null
 }
 function RemoveStartup
 {
 	Write-Output "RemoveStartup"
-	$BLACKLIST = "OneDrive|SecurityHealth"
+	$BLACKLIST = (@(
+		"OneDrive"
+		"SecurityHealth"
+		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-Item -path @(
 		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 		#"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
@@ -71,7 +126,6 @@ function RemoveStartup
 				}
 				If ($ENTRY.ShouldDisable)
 				{
-					Write-Output $ENTRY.Path $ENTRY.Name
 					Remove-ItemProperty -Path $ENTRY.Path -Name $ENTRY.Name | Out-Null
 				}
 			}
