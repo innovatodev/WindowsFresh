@@ -25,14 +25,14 @@ Function UninstallUWP
 Function DisableServices
 {
 	Write-Output "DisableServices"
-	$BLACKLIST = "ALG|BDESVC|BTAGService|BthAvctpSvc|CDPSvc|CscService|DiagnosticsHub.StandardCollector.Service|DiagTrack|dmwappushservice|DPS|edgeupdate|edgeupdatem|Fax|flightsettings|icssvc|iphlpsvc|irmon|LanmanServer|lfsvc|lmhosts|MicrosoftEdgeElevationService|moshost|MSiSCSI|Netlogon|NfsClnt|pcasvc|PeerDistSvc|PhoneSvc|PrintNotify|QWAVE|RemoteAccess|RemoteRegistry|RetailDemo|RpcLocator|SCardSvr|ScDeviceEnum|SCPolicySvc|seclogon|SEMgrSvc|SharedAccess|shpamsvc|SmsRouter|SNMPTRAP|Spooler|SSDPSRV|stisvc|tzautoupdate|WbioSrvc|WdiServiceHost|WdiSystemHost|WinRM|wisvc|WpcMonSvc|WpnService|WSearch|WwanSvc|XblAuthManager|XblGameSave|XboxGipSvc|XboxNetApiSvc"
+	$BLACKLIST = "ALG|BDESVC|BTAGService|BthAvctpSvc|CDPSvc|CscService|DiagnosticsHub.StandardCollector.Service|DiagTrack|dmwappushservice|DPS|edgeupdate|edgeupdatem|Fax|flightsettings|icssvc|iphlpsvc|irmon|LanmanServer|lfsvc|lmhosts|MicrosoftEdgeElevationService|moshost|MSiSCSI|Netlogon|NfsClnt|pcasvc|PeerDistSvc|PhoneSvc|PrintNotify|QWAVE|RemoteAccess|RemoteRegistry|RetailDemo|RpcLocator|SCardSvr|ScDeviceEnum|SCPolicySvc|seclogon|SEMgrSvc|SharedAccess|shpamsvc|SmsRouter|SNMPTRAP|Spooler|SSDPSRV|stisvc|tzautoupdate|WbioSrvc|WdiServiceHost|WdiSystemHost|WinRM|wisvc|WpcMonSvc|WpnService|WSearch|WwanSvc|XblAuthManager|XblGameSave|XboxGipSvc|XboxNetApiSvc|gupdate|gupdatem|brave|bravem|MozillaMaintenance|GoogleChromeElevationService|DbxSvc|AdobeARMservice"
     Get-Service | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.StartType -notlike 'Disabled' } | Set-Service -StartupType Disabled | Out-Null
 }
 # Disable tasks with blacklist
 Function DisableTasks
 {
 	Write-Output "DisableTasks"
-	[regex]$BLACKLIST = "Edge|OneDrive|Microsoft Compatibility Appraiser|Proxy|Consolidator|UsbCeip|ScheduledDefrag|SilentCleanup|Microsoft-Windows-DiskDiagnosticDataCollector|FODCleanupTask|Synchronize Language Settings|MapsToastTask|GatherNetworkInfo|RemoteAssistanceTask|StartComponentCleanup|SpeechModelDownloadTask|QueueReporting|UpdateLibrary|XblGameSaveTask|Office|Chrome|Ccleaner|Opera"
+	[regex]$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|UsbCeip|ScheduledDefrag|SilentCleanup|Microsoft-Windows-DiskDiagnosticDataCollector|FODCleanupTask|Synchronize Language Settings|MapsToastTask|GatherNetworkInfo|RemoteAssistanceTask|StartComponentCleanup|SpeechModelDownloadTask|QueueReporting|UpdateLibrary|XblGameSaveTask|Edge|OneDrive|Office|Google|Ccleaner|Opera|Brave|Acrobat|Dropbox|Visual Studio|Java"
 	Get-ScheduledTask | Where-Object { $_.TaskName -Match $BLACKLIST } | Where-Object { $_.State -notlike 'Disabled' } | Disable-ScheduledTask | Out-Null
 }
 # Disable features with blacklist
@@ -49,6 +49,31 @@ Function DisableCapabilities
 	[regex]$BLACKLIST = "StepsRecorder|QuickAssist|InternetExplorer|Hello.Face|MathRecognizer|WindowsMediaPlayer|WordPad|OneSync|OpenSSH|Print"
 	Get-WindowsCapability -Online | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.State -like 'Installed' } | Remove-WindowsCapability -Online | Out-Null
 }
+Function RemoveStartup
+{
+	Write-Output "RemoveStartup"
+	$1 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+	$2 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+	$3 = "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
+	$4 = "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+	$5 = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+	$6 = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+	$BLACKLIST = "Ccleaner|Dropbox|Java|Opera|Brave|Chrome|Google|Acrobat"
+	Get-Item -path $1,$2,$3,$4,$5,$6 | Where-Object {$_.ValueCount -ne 0} | 
+	Select-Object  @{Name = 'Location';Expression = {$_.name -replace 'HKEY_LOCAL_MACHINE','HKLM' -replace 'HKEY_CURRENT_USER','HKCU'}},
+	@{Name = 'Name';Expression = {$_.Property}} | 
+	ForEach-Object{
+		ForEach($BLACKLISTName in $BLACKLIST)
+		{
+			If($_.Name -match $BLACKLISTName)
+			{ 
+				Write-Output "$_ removed from strartup"
+				reg.exe DELETE $_.Location /v $_.Name /f | Out-Null
+			}
+		}
+	}
+}
+
 Function UnpinStartMenu
 {
 	Write-Output "UnpinStartMenu"

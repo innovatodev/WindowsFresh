@@ -34,6 +34,10 @@ Disable not frequently used Capabilities, blacklist can be customized as well.
 
 Disable privacy related tasks, auto updates tasks, diagnostics tasks, blacklist can be customized as well.
 
+- ### __Remove Startup Entries (BLACKLIST)__
+
+Remove blacklisted startup entries, blacklist can be customized as well.
+
 - ### __Tweak the Windows (PRESET)__
 
 Tweak the entire Windows from UI customization to Security in a single preset file, most of the tweaks have opposite option (show/hide,enable/disable) then in case you tweaked something you dont like, you can change it and run the script again.
