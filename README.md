@@ -53,7 +53,7 @@ Or remove everything you dont need :
 
 ![Image](https://github.com/innovatodev/WindowsFresh/blob/master/IMG/1.png)
 
-By default, Windows defender will protect you :
+By default, Windows Defender will protect you :
 
 ![Image](https://github.com/innovatodev/WindowsFresh/blob/master/IMG/3.png)
 
