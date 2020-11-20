@@ -11,6 +11,9 @@ function Check
 		}
 	}
 }
+If (!(Test-Path "HKCR:")) {
+	New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
+}
 # Uninstall UWP apps with whitelist
 Function UninstallUWP
 {
@@ -149,9 +152,6 @@ Function UninstallOneDrive
 	Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
 	Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
 	Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue | Out-Null
 	Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue | Out-Null
 }
@@ -604,18 +604,12 @@ Function HideNetworkOnDesktop
 Function HideIncludeInLibraryMenu
 {
 	Write-Output "HideIncludeInLibraryMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	Remove-Item -Path "HKCR:\Folder\ShellEx\ContextMenuHandlers\Library Location" -ErrorAction SilentlyContinue | Out-Null
 }
 # Show 'Include in library' context menu item
 Function ShowIncludeInLibraryMenu
 {
 	Write-Output "ShowIncludeInLibraryMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	New-Item -Path "HKCR:\Folder\ShellEx\ContextMenuHandlers\Library Location" -ErrorAction SilentlyContinue | Out-Null
 	Set-ItemProperty -Path "HKCR:\Folder\ShellEx\ContextMenuHandlers\Library Location" -Name "(Default)" -Type String -Value "{3dad6c5d-2167-4cae-9914-f99e41c12cfa}" | Out-Null
 }
@@ -623,9 +617,6 @@ Function ShowIncludeInLibraryMenu
 Function HideGiveAccessToMenu
 {
 	Write-Output "HideGiveAccessToMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	Remove-Item -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
 	Remove-Item -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
 	Remove-Item -Path "HKCR:\Directory\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
@@ -636,9 +627,6 @@ Function HideGiveAccessToMenu
 Function ShowGiveAccessToMenu
 {
 	Write-Output "ShowGiveAccessToMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	New-Item -Path "HKCR:\*\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue | Out-Null
 	Set-ItemProperty -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\Sharing" -Name "(Default)" -Type String -Value "{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}" | Out-Null
 	New-Item -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue | Out-Null
@@ -652,18 +640,12 @@ Function ShowGiveAccessToMenu
 Function HideShareMenu
 {
 	Write-Output "HideShareMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	Remove-Item -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing" -ErrorAction SilentlyContinue | Out-Null
 }
 # Show 'Share' context menu item. Applicable since 1709
 Function ShowShareMenu
 {
 	Write-Output "ShowShareMenu"
-	If (!(Test-Path "HKCR:")) {
-		New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
-	}
 	New-Item -Path "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing" -ErrorAction SilentlyContinue | Out-Null
 	Set-ItemProperty -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing" -Name "(Default)" -Type String -Value "{e2bf9676-5f8f-435c-97eb-11607a5bedf7}" | Out-Null
 }
@@ -3160,7 +3142,7 @@ Function HideEditWithPaint3DContext
 	$Extensions = @(".bmp", ".gif", ".jpe", ".jpeg", ".jpg", ".png", ".tif", ".tiff")
 	foreach ($extension in $extensions)
 	{
-		New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+		New-ItemProperty -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
 	}
 }
 # Show the "Edit with Paint 3D" item from the context menu
@@ -3170,7 +3152,7 @@ Function ShowEditWithPaint3DContext
 	$Extensions = @(".bmp", ".gif", ".jpe", ".jpeg", ".jpg", ".png", ".tif", ".tiff")
 	foreach ($Extension in $Extensions)
 	{
-		Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+		Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 	}
 }
 # Hide the "Edit with Photos" item from the context menu
@@ -3239,41 +3221,41 @@ Function ShowPrintCMDContext
 Function HideSendToContext
 {
 	Write-Output "HideSendToContext"
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo -Name "(Default)" -PropertyType String -Value "-{7BA4C740-9E81-11CF-99D3-00AA004AE837}" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" -Name "(Default)" -PropertyType String -Value "-{7BA4C740-9E81-11CF-99D3-00AA004AE837}" -Force | Out-Null
 }
 # Show the "Send to" item from the folders context menu
 Function ShowSendToContext
 {
 	Write-Output "ShowSendToContext"
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo -Name "(Default)" -PropertyType String -Value "{7BA4C740-9E81-11CF-99D3-00AA004AE837}" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" -Name "(Default)" -PropertyType String -Value "{7BA4C740-9E81-11CF-99D3-00AA004AE837}" -Force | Out-Null
 }
 # Hide the "Turn on BitLocker" item from the context menu
 Function HideBitLockerContext
 {
 	Write-Output "HideBitLockerContext"
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde-elev -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\manage-bde -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\resume-bde -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\resume-bde-elev -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\unlock-bde -Name ProgrammaticAccessOnly -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\encrypt-bde" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\encrypt-bde-elev" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\manage-bde" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\resume-bde" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\resume-bde-elev" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\Drive\shell\unlock-bde" -Name "ProgrammaticAccessOnly" -PropertyType String -Value "" -Force | Out-Null
 }
 # Show the "Turn on BitLocker" item from the context menu
 Function ShowBitLockerContext
 {
 	Write-Output "ShowBitLockerContext"
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde-elev -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\manage-bde -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\resume-bde -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\resume-bde-elev -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
-	Remove-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\Drive\shell\unlock-bde -Name ProgrammaticAccessOnly -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\encrypt-bde" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\encrypt-bde-elev" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\manage-bde" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\resume-bde" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\resume-bde-elev" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-ItemProperty -Path "HKCR:\Drive\shell\unlock-bde" -Name "ProgrammaticAccessOnly" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 # Hide the "Bitmap image" item from the "New" context menu
 Function HideBitmapNewContext
 {
 	Write-Output "HideBitmapNewContext"
-	Remove-Item -Path Registry::HKEY_CLASSES_ROOT\.bmp\ShellNew -Force -ErrorAction SilentlyContinue | Out-Null
+	Remove-Item -Path "HKCR:\.bmp\ShellNew" -Force -ErrorAction SilentlyContinue | Out-Null
 }
 # Remove Troubleshoot Compatibillity context
 Function RemoveCompatibillityContext
@@ -3295,46 +3277,46 @@ Function AddCompatibillityContext
 Function ShowBitmapNewContext
 {
 	Write-Output "ShowBitmapNewContext"
-	if (-not (Test-Path -Path Registry::HKEY_CLASSES_ROOT\.bmp\ShellNew))
+	if (-not (Test-Path -Path "HKCR:\.bmp\ShellNew"))
 	{
-		New-Item -Path Registry::HKEY_CLASSES_ROOT\.bmp\ShellNew -Force | Out-Null
+		New-Item -Path "HKCR:\.bmp\ShellNew" -Force | Out-Null
 	}
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.bmp\ShellNew -Name ItemName -PropertyType ExpandString -Value "@%systemroot%\system32\mspaint.exe,-59414" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.bmp\ShellNew -Name NullFile -PropertyType String -Value "" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.bmp\ShellNew" -Name "ItemName" -PropertyType ExpandString -Value "@%systemroot%\system32\mspaint.exe,-59414" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.bmp\ShellNew" -Name "NullFile" -PropertyType String -Value "" -Force | Out-Null
 }
 # Hide the "Rich Text Document" item from the "New" context menu
 Function HideRichTextDocumentNewContext
 {
 	Write-Output "HideRichTextDocumentNewContext"
-	Remove-Item -Path Registry::HKEY_CLASSES_ROOT\.rtf\ShellNew -Force -ErrorAction Ignore | Out-Null
+	Remove-Item -Path "HKCR:\.rtf\ShellNew" -Force -ErrorAction Ignore | Out-Null
 }
 # Show the "Rich Text Document" item from the "New" context menu
 Function ShowRichTextDocumentNewContext
 {
 	Write-Output "ShowRichTextDocumentNewContext"
-	if (-not (Test-Path -Path Registry::HKEY_CLASSES_ROOT\.rtf\ShellNew))
+	if (-not (Test-Path -Path "HKCR:\.rtf\ShellNew"))
 	{
-		New-Item -Path Registry::HKEY_CLASSES_ROOT\.rtf\ShellNew -Force | Out-Null
+		New-Item -Path "HKCR:\.rtf\ShellNew" -Force | Out-Null
 	}
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.rtf\ShellNew -Name Data -PropertyType String -Value "{\rtf1}" -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.rtf\ShellNew -Name ItemName -PropertyType ExpandString -Value "@%ProgramFiles%\Windows NT\Accessories\WORDPAD.EXE,-213" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.rtf\ShellNew" -Name "Data" -PropertyType String -Value "{\rtf1}" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.rtf\ShellNew" -Name "ItemName" -PropertyType ExpandString -Value "@%ProgramFiles%\Windows NT\Accessories\WORDPAD.EXE,-213" -Force | Out-Null
 }
 # Hide the "Compressed (zipped) Folder" item from the "New" context menu
 Function HideCompressedFolderNewContext
 {
 	Write-Output "HideCompressedFolderNewContext"
-	Remove-Item -Path Registry::HKEY_CLASSES_ROOT\.zip\CompressedFolder\ShellNew -Force -ErrorAction Ignore | Out-Null
+	Remove-Item -Path "HKCR:\.zip\CompressedFolder\ShellNew" -Force -ErrorAction Ignore | Out-Null
 }
 # Show the "Compressed (zipped) Folder" item from the "New" context menu
 Function ShowCompressedFolderNewContext
 {
 	Write-Output "ShowCompressedFolderNewContext"
-	if (-not (Test-Path -Path Registry::HKEY_CLASSES_ROOT\.zip\CompressedFolder\ShellNew))
+	if (-not (Test-Path -Path "HKCR:\.zip\CompressedFolder\ShellNew"))
 	{
-		New-Item -Path Registry::HKEY_CLASSES_ROOT\.zip\CompressedFolder\ShellNew -Force | Out-Null
+		New-Item -Path "HKCR:\.zip\CompressedFolder\ShellNew" -Force | Out-Null
 	}
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.zip\CompressedFolder\ShellNew -Name Data -PropertyType Binary -Value ([byte[]](80,75,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)) -Force | Out-Null
-	New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\.zip\CompressedFolder\ShellNew -Name ItemName -PropertyType ExpandString -Value "@%SystemRoot%\system32\zipfldr.dll,-10194" -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.zip\CompressedFolder\ShellNew" -Name "Data" -PropertyType Binary -Value ([byte[]](80,75,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)) -Force | Out-Null
+	New-ItemProperty -Path "HKCR:\.zip\CompressedFolder\ShellNew" -Name "ItemName" -PropertyType ExpandString -Value "@%SystemRoot%\system32\zipfldr.dll,-10194" -Force | Out-Null
 }
 # Hide the "Previous Versions" tab from files and folders context menu and also the "Restore previous versions" context menu item
 Function HidePreviousVersionsPage
