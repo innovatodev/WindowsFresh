@@ -29,14 +29,14 @@ Function DisableServices
 Function DisableTasks
 {
 	Write-Output "DisableTasks"
-	[regex]$BLACKLIST = "Edge|OneDrive|Microsoft Compatibility Appraiser|Proxy|Consolidator|UsbCeip|ScheduledDefrag|SilentCleanup|Microsoft-Windows-DiskDiagnosticDataCollector|FODCleanupTask|Synchronize Language Settings|MapsToastTask|GatherNetworkInfo|RemoteAssistanceTask|StartComponentCleanup|SpeechModelDownloadTask|QueueReporting|UpdateLibrary|XblGameSaveTask|Office|Chrome|Ccleaner"
+	[regex]$BLACKLIST = "Edge|OneDrive|Microsoft Compatibility Appraiser|Proxy|Consolidator|UsbCeip|ScheduledDefrag|SilentCleanup|Microsoft-Windows-DiskDiagnosticDataCollector|FODCleanupTask|Synchronize Language Settings|MapsToastTask|GatherNetworkInfo|RemoteAssistanceTask|StartComponentCleanup|SpeechModelDownloadTask|QueueReporting|UpdateLibrary|XblGameSaveTask|Office|Chrome|Ccleaner|Opera"
 	Get-ScheduledTask | Where-Object { $_.TaskName -Match $BLACKLIST } | Where-Object { $_.State -notlike 'Disabled' } | Disable-ScheduledTask | Out-Null
 }
 # Disable features with blacklist
 Function DisableFeatures
 {
 	Write-Output "DisableFeatures"
-	[regex]$BLACKLIST = "Printing|SearchEngine|MSRDC-Infrastructure|WCF-TCP-PortSharing45|MediaPlayback|WindowsMediaPlayer|SmbDirect|Internet-Explorer|WorkFolders|PowerShellV2"
+	[regex]$BLACKLIST = "Printing|SearchEngine|MSRDC-Infrastructure|WCF-Services45|WCF-TCP-PortSharing45|MediaPlayback|WindowsMediaPlayer|SmbDirect|Internet-Explorer|WorkFolders|PowerShellV2"
 	Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -Match $BLACKLIST }  | Where-Object { $_.State -like 'Enabled' } | Disable-WindowsOptionalFeature -Online -NoRestart | Out-Null
 }
 # Disable Capabilities with blacklist
