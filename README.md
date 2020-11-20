@@ -36,7 +36,7 @@ Disable privacy related tasks, auto updates tasks, diagnostics tasks, blacklist 
 
 Tweak the entire Windows from UI customization to Security in a single preset file, most of the tweaks have opposite option (show/hide,enable/disable) then in case you tweaked something you dont like, you can change it and run the script again.
 
-Feels free to help on the project there just a single rule : Tweaks need to have opposite option Show/Hide by example, 
+Feels free to help on the project there just a single rule : Tweaks need to have opposite option Show/Hide by example.
 
 
 
