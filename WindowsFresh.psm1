@@ -25,7 +25,7 @@ Function UninstallUWP
 Function DisableServices
 {
 	Write-Output "DisableServices"
-	$BLACKLIST = "RemoteAccess|RemoteRegistry"
+	$BLACKLIST = "RemoteAccess|RemoteRegistry|WSearch"
     Get-Service | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.StartType -notlike 'Disabled' } | Set-Service -StartupType Disabled | Out-Null
 }
 # Disable tasks with blacklist
