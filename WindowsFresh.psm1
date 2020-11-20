@@ -25,14 +25,14 @@ Function UninstallUWP
 Function DisableServices
 {
 	Write-Output "DisableServices"
-	$BLACKLIST = "ALG|BDESVC|BTAGService|BthAvctpSvc|CDPSvc|CscService|DiagnosticsHub.StandardCollector.Service|DiagTrack|dmwappushservice|DPS|edgeupdate|edgeupdatem|Fax|flightsettings|icssvc|iphlpsvc|irmon|LanmanServer|lfsvc|lmhosts|MicrosoftEdgeElevationService|moshost|MSiSCSI|Netlogon|NfsClnt|pcasvc|PeerDistSvc|PhoneSvc|PrintNotify|QWAVE|RemoteAccess|RemoteRegistry|RetailDemo|RpcLocator|SCardSvr|ScDeviceEnum|SCPolicySvc|seclogon|SEMgrSvc|SharedAccess|shpamsvc|SmsRouter|SNMPTRAP|Spooler|SSDPSRV|stisvc|tzautoupdate|WbioSrvc|WdiServiceHost|WdiSystemHost|WinRM|wisvc|WpcMonSvc|WpnService|WSearch|WwanSvc|XblAuthManager|XblGameSave|XboxGipSvc|XboxNetApiSvc|gupdate|gupdatem|brave|bravem|MozillaMaintenance|GoogleChromeElevationService|DbxSvc|AdobeARMservice"
+	$BLACKLIST = "RemoteAccess|RemoteRegistry"
     Get-Service | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.StartType -notlike 'Disabled' } | Set-Service -StartupType Disabled | Out-Null
 }
 # Disable tasks with blacklist
 Function DisableTasks
 {
 	Write-Output "DisableTasks"
-	$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|UsbCeip|ScheduledDefrag|SilentCleanup|Microsoft-Windows-DiskDiagnosticDataCollector|FODCleanupTask|Synchronize Language Settings|MapsToastTask|GatherNetworkInfo|RemoteAssistanceTask|StartComponentCleanup|SpeechModelDownloadTask|QueueReporting|UpdateLibrary|XblGameSaveTask|Edge|OneDrive|Office|Google|Ccleaner|Opera|Brave|Acrobat|Dropbox|Visual Studio|Java"
+	$BLACKLIST = "Microsoft Compatibility Appraiser|Proxy|Consolidator|Microsoft-Windows-DiskDiagnosticDataCollector|GatherNetworkInfo"
 	Get-ScheduledTask | Where-Object { $_.TaskName -Match $BLACKLIST } | Where-Object { $_.State -notlike 'Disabled' } | Disable-ScheduledTask | Out-Null
 }
 # Disable features with blacklist
@@ -52,12 +52,12 @@ Function DisableCapabilities
 function RemoveStartup
 {
 	Write-Output "RemoveStartup"
-	$BLACKLIST = "OneDrive|SecurityHealth|JeanMichel"
+	$BLACKLIST = "OneDrive|SecurityHealth"
 	Get-Item -path @(
 		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+		#"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
 		"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
-		"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+		#"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
 		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
 	) | Where-Object ValueCount -ne 0 |
@@ -71,7 +71,7 @@ function RemoveStartup
 				}
 				If ($ENTRY.ShouldDisable)
 				{
-					Write-Output $ENTRY.Path $ENTRY.Name 
+					Write-Output $ENTRY.Path $ENTRY.Name
 					Remove-ItemProperty -Path $ENTRY.Path -Name $ENTRY.Name 
 				}
 			}

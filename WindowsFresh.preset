@@ -3,11 +3,11 @@ Check
 
 ### APPLICATIONS ###
 UninstallUWP
-#DisableServices
-#DisableTasks
-#DisableFeatures
-#DisableCapabilities
-#RemoveStartup
+DisableServices
+DisableTasks
+DisableFeatures
+DisableCapabilities
+RemoveStartup
 #UnpinStartMenu
 #DisableCortana #EnableCortana
 #DisableOneDrive #EnableOneDrive
