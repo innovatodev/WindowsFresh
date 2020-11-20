@@ -1,11 +1,13 @@
 # WindowsFresh  
 ## PowerShell Script for automated Windows 10 configuration.
 
-It is recommended to run on a fresh Windows installation, not really mandatory but it could cause some problems if current install is already tweaked by other methods.
+Recommended to run on a fresh Windows installation, not really mandatory but it could cause some problems if current install is already tweaked by other methods.
+
+And if you reinstall Windows, do it with a clean ISO provided by microsoft (Download Windows USB/DVD Download Tool by example) because it is not bloated by OEM manufacturers (HP,LENOVO etc...)
 
 Does no support old Windows versions and LTSC versions, this script will works perfectly only on last Windows version (Actually Windows 10 20H2).
 
-It is recommended to reinstall Windows with a clean ISO provided by microsoft (Download Windows USB/DVD Download Tool by example) because it is not bloated by OEM manufacturers (HP,LENOVO etc...)
+
 
 
 The script functionnalities are :
