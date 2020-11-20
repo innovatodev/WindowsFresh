@@ -39,7 +39,7 @@ Tweak the entire Windows from UI customization to Security in a single preset fi
 
 After a full clean preset, windows can looks like this :
 
-[logo]: https://github.com/innovatodev/WindowsFresh/blob/master/IMG/1.png "WindowsFresh Full Clean"
+!(https://github.com/innovatodev/WindowsFresh/blob/master/IMG/1.png)
 
 
 
