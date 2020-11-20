@@ -49,29 +49,33 @@ Function DisableCapabilities
 	[regex]$BLACKLIST = "StepsRecorder|QuickAssist|InternetExplorer|Hello.Face|MathRecognizer|WindowsMediaPlayer|WordPad|OneSync|OpenSSH|Print"
 	Get-WindowsCapability -Online | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.State -like 'Installed' } | Remove-WindowsCapability -Online | Out-Null
 }
-Function RemoveStartup
+function RemoveStartup
 {
 	Write-Output "RemoveStartup"
-	$1 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-	$2 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
-	$3 = "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
-	$4 = "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
-	$5 = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-	$6 = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
-	$BLACKLIST = "Ccleaner|Dropbox|Java|Opera|Brave|Chrome|Google|Acrobat"
-	Get-Item -path $1,$2,$3,$4,$5,$6 | Where-Object {$_.ValueCount -ne 0} | 
-	Select-Object  @{Name = 'Location';Expression = {$_.name -replace 'HKEY_LOCAL_MACHINE','HKLM' -replace 'HKEY_CURRENT_USER','HKCU'}},
-	@{Name = 'Name';Expression = {$_.Property}} | 
-	ForEach-Object{
-		ForEach($BLACKLISTName in $BLACKLIST)
-		{
-			If($_.Name -match $BLACKLISTName)
-			{ 
-				Write-Output "$_ removed from strartup"
-				reg.exe DELETE $_.Location /v $_.Name /f | Out-Null
+	$BLACKLIST = "BLABLABLA|BLIBLIBLI"
+	Get-Item -path @(
+		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+		"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
+		"HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+		"HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+	) | Where-Object ValueCount -ne 0 |
+		ForEach-Object {
+			foreach ($name in $_.GetValueNames()) {
+				$ENTRY = [PSCustomObject]@{
+					Name     = $name
+					Value    = $_.GetValue($name)
+					ShouldDisable = $name -match $BLACKLIST
+					Path          = $_.PSPath
+				}
+				If ($ENTRY.ShouldDisable)
+				{
+					Write-Output $ENTRY.Path $ENTRY.Name 
+					Remove-ItemProperty -Path $ENTRY.Path -Name $ENTRY.Name 
+				}
 			}
 		}
-	}
 }
 
 Function UnpinStartMenu
