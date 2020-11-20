@@ -3631,7 +3631,7 @@ Function BlockMicrosoftAccount
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Force | Out-Null
 	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Name "DisableUserAuth" -Type DWord -Value 0 | Out-Null
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Name "DisableUserAuth" -Type DWord -Value 1 | Out-Null
 	
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\System")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\System" -Force | Out-Null
