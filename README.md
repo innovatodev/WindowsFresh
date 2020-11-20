@@ -3,7 +3,7 @@ PowerShell Script for automated Windows 10 configuration.
 
 1-Uninstall UWP Apps (WHITELIST)
 
-Remove all UWP bloat by default, the whitelist can be customized as well and most used UWP Apps like camera, photo viewer and microsoft store are not uninstalled by default, they are in the tweak preset file.
+Remove all UWP bloat by default, the whitelist can be customized as well and most used UWP Apps like Camera, Photos, Calculator and Microsoft Store are not uninstalled by default, they are in the tweak preset file.
 
 Removed Apps can be installed again without problems, it just remove it for this user, windows reinstall some after updates, just run the script again.
 
