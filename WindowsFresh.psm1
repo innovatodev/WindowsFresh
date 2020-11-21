@@ -3197,6 +3197,94 @@ Function EnableDefenderSandbox
 	Write-Output "EnableDefenderSandbox"
 	setx /M MP_FORCE_USE_SANDBOX 1 | Out-Null
 }
+# Disable all exploit mitigations (Not recommended)
+Function DisableMitigations
+{
+	Write-Output "DisableMitigations"
+	$Path = "$PSScriptRoot\SETTINGS.xml"
+    @(
+	'<?xml version="1.0" encoding="UTF-8"?>
+	<MitigationPolicy>
+	  <SystemConfig>
+		<DEP Enable="false" EmulateAtlThunks="false" />
+		<ASLR ForceRelocateImages="false" RequireInfo="false" BottomUp="false" HighEntropy="false" />
+		<ControlFlowGuard Enable="false" SuppressExports="false" StrictControlFlowGuard="false" />
+		<SEHOP Enable="false" TelemetryOnly="false" />
+		<Heap TerminateOnError="false" />
+	  </SystemConfig>
+	</MitigationPolicy>'
+) | Add-Content -Path $Path
+Set-ProcessMitigation -PolicyFilePath $Path
+Remove-Item -Path $Path
+}
+# Restore all exploit mitigation to default values
+Function DefaultMitigations
+{
+	Write-Output "DefaultMitigations"
+	$Path = "$PSScriptRoot\SETTINGS.xml"
+	@(
+		'<?xml version="1.0" encoding="UTF-8"?>
+		<MitigationPolicy>
+		  <SystemConfig>
+			<DEP Enable="true" EmulateAtlThunks="false" />
+			<ASLR ForceRelocateImages="false" RequireInfo="false" BottomUp="true" HighEntropy="true" />
+			<ControlFlowGuard Enable="true" SuppressExports="false" />
+			<SEHOP Enable="true" TelemetryOnly="false" />
+			<Heap TerminateOnError="true" />
+		  </SystemConfig>
+		  <AppConfig Executable="ExtExport.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="ie4uinit.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="ieinstal.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="ielowutil.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="ieUnatt.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="iexplore.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="mscorsvw.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		  <AppConfig Executable="msfeedssync.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="mshta.exe">
+			<ASLR ForceRelocateImages="true" RequireInfo="false" />
+		  </AppConfig>
+		  <AppConfig Executable="ngen.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		  <AppConfig Executable="ngentask.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		  <AppConfig Executable="PresentationHost.exe">
+			<DEP Enable="true" EmulateAtlThunks="false" />
+			<ASLR ForceRelocateImages="true" RequireInfo="false" BottomUp="true" HighEntropy="true" />
+			<SEHOP Enable="true" TelemetryOnly="false" />
+			<Heap TerminateOnError="true" />
+		  </AppConfig>
+		  <AppConfig Executable="PrintDialog.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		  <AppConfig Executable="runtimebroker.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		  <AppConfig Executable="SystemSettings.exe">
+			<ExtensionPoints DisableExtensionPoints="true" />
+		  </AppConfig>
+		</MitigationPolicy>'
+	) | Add-Content -Path $Path
+	Set-ProcessMitigation -PolicyFilePath $Path
+	Remove-Item -Path $Path
+}
 # Hide the "Cast to Device" item from the context menu
 Function HideCastToDeviceContext
 {

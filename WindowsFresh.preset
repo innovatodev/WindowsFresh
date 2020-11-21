@@ -20,19 +20,20 @@ DisableXboxFeatures #EnableXboxFeatures
 
 ### SECURITY ###
 SetUACHigh #SetUACLow
-#DisableDefenderCloud #EnableDefenderCloud
-#DisableDefenderAppGuard #EnableDefenderAppGuard
+DisableDefenderCloud #EnableDefenderCloud
+DisableDefenderAppGuard #EnableDefenderAppGuard
 HideAccountProtectionWarn #ShowAccountProtectionWarn
-#DisableDownloadBlocking #EnableDownloadBlocking
-#EnableScriptHost #DisableScriptHost
+DisableDownloadBlocking #EnableDownloadBlocking
+DisableScriptHost #EnableScriptHost 
 EnableFirewall #DisableFirewall
-#DisableSmartScreen #EnableSmartScreen
-#DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
-#DisablePUAppsDetection #EnablePUAppsDetection
-#DisableDefenderSandbox #EnableDefenderSandbox
-#SetDEPOptIn #SetDEPOptOut
+DisableSmartScreen #EnableSmartScreen
+DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
+DisablePUAppsDetection #EnablePUAppsDetection
+DisableDefenderSandbox #EnableDefenderSandbox
+DefaultMitigations #DisableMitigations
+SetDEPOptIn #SetDEPOptOut
 FirewallDeleteAllRules
-#HideDefenderTrayIcon #ShowDefenderTrayIcon
+ShowDefenderTrayIcon #HideDefenderTrayIcon
 EnableRestorePoints #DisableRestorePoints
 
 ### UPDATES ###
