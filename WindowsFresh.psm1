@@ -36,7 +36,7 @@ Function UninstallUWP
 		"AdvancedMicroDevicesInc"
 		"Realtek"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-	Get-AppxPackage -PackageTypeFilter Bundle | Where-Object { $_.Name -NotMatch $WHITELIST } | Where-Object { $_.NonRemovable -notlike 'True' } | Remove-AppxPackage | Out-Null
+	Get-AppxPackage -PackageTypeFilter Bundle -AllUsers | Where-Object { $_.Name -NotMatch $WHITELIST } | Where-Object { $_.NonRemovable -notlike 'True' } | Remove-AppxPackage -AllUsers | Out-Null
 }
 # Disable services with blacklist
 Function DisableServices
@@ -106,7 +106,10 @@ function RemoveStartup
 	Write-Output "RemoveStartup"
 	$BLACKLIST = (@(
 		"OneDrive"
-		"SecurityHealth"
+		"Java"
+		"Steam"
+		"Epic"
+		"Discord"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 	Get-Item -path @(
 		"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
@@ -184,7 +187,7 @@ Function DisableCortana
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" -Force | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" -Name "AllowInputPersonalization" -Type DWord -Value 0 | Out-Null
-	Get-AppxPackage "Microsoft.549981C3F5F10"  | Remove-AppxPackage
+	Get-AppxPackage "Microsoft.549981C3F5F10" | Remove-AppxPackage
 }
 # Enable Cortana
 Function EnableCortana
@@ -198,7 +201,7 @@ Function EnableCortana
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana" -Name "Value" -Type DWord -Value 1 | Out-Null
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue | Out-Null
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" -Name "AllowInputPersonalization" -ErrorAction SilentlyContinue | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.549981C3F5F10" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.549981C3F5F10" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 }
 # Disable OneDrive
 Function DisableOneDrive
@@ -261,16 +264,16 @@ Function UninstallWindowsStore
 Function InstallWindowsStore
 {
 	Write-Output "InstallWindowsStore"
-	Get-AppxPackage -AllUsers "Microsoft.DesktopAppInstaller" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.Services.Store.Engagement" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.StorePurchaseApp" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.WindowsStore" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.DesktopAppInstaller" -AllUsers | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.Services.Store.Engagement" -AllUsers | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.StorePurchaseApp" -AllUsers | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.WindowsStore" -AllUsers | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 }
 # Install Windows Photos
 Function InstallWindowsPhotos
 {
 	Write-Output "InstallWindowsPhotos"
-	Get-AppxPackage -AllUsers "Microsoft.Windows.Photos" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.Windows.Photos" -AllUsers  | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 }
 # Uninstall Windows Photos
 Function UninstallWindowsPhotos
@@ -282,7 +285,7 @@ Function UninstallWindowsPhotos
 Function InstallWindowsCamera
 {
 	Write-Output "InstallWindowsCamera"
-	Get-AppxPackage -AllUsers "Microsoft.WindowsCamera" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.WindowsCamera" -AllUsers  | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 }
 # Uninstall Windows Camera
 Function UninstallWindowsCamera
@@ -294,7 +297,7 @@ Function UninstallWindowsCamera
 Function InstallWindowsCalculator
 {
 	Write-Output "InstallWindowsCalculator"
-	Get-AppxPackage -AllUsers "Microsoft.WindowsCalculator" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage "Microsoft.WindowsCalculator" -AllUsers  | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 }
 # Uninstall Windows Calculator
 Function UninstallWindowsCalculator
