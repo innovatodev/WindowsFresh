@@ -14,9 +14,9 @@ The script functionnalities are :
 
 - ###  __Uninstall UWP Apps (WHITELIST)__ 
 
-Remove all UWP bloat by default, the whitelist can be customized as well and most used UWP Apps like Camera, Photos, Calculator and Microsoft Store are not uninstalled by default, they are in the tweak preset file.
+Remove all UWP bloat by default, the whitelist can be customized as well and not useless UWP Apps like Camera, Photos, Calculator and Microsoft Store are not uninstalled by default, they are in the tweak preset file.
 
-Removed Apps can be installed again without problems, it just remove it for this user, windows reinstall some after updates, just run the script again.
+Removed Apps can be installed again without problems, if Windows add new useless UWP Apps in the future, the whitelist system will catch these too, just run the script again !
 
 - ### __Disable Windows Services (BLACKLIST)__
 
