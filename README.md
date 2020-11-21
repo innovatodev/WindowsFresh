@@ -51,15 +51,15 @@ Feels free to help on the project there just a single rule : Tweaks need to have
 
 You have choice to keep essentials Windows Apps :
 
-![Image](https://i.imgur.com/v0UYGDd.png)
+!(https://i.imgur.com/v0UYGDd.png)
 
 Or remove everything you dont need :
 
-![Image](https://i.imgur.com/HpK8utz.png)
+!(https://i.imgur.com/HpK8utz.png)
 
 By default, Windows Defender will protect you :
 
-![Image](https://i.imgur.com/lwDfjAl.png)
+!(https://i.imgur.com/lwDfjAl.png)
 
 
 
