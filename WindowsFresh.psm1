@@ -32,6 +32,7 @@
 		"Edge"
 		"OneDrive"
 		"XblGameSaveTask"
+		"BackgroundDownload"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 		### FEATURES ###
 		$global:BLACKLIST_FEATURES = (@(
