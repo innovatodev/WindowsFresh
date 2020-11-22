@@ -1,3 +1,4 @@
+$WarningPreference = "SilentlyContinue"
 function Check
 {
 	Set-StrictMode -Version Latest
