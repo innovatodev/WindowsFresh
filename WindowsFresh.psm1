@@ -1,4 +1,4 @@
-        #Add or remove entries here (One per line, do not touch anything else)
+        #### UWP Apps ###
 		$global:WHITELIST_UWP = (@(
 		"549981C3F5F10"
 		"Windows.Photo"
@@ -17,10 +17,12 @@
 		"AdvancedMicroDevicesInc"
 		"Realtek"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		### SERVICES ###
 		$global:BLACKLIST_SERVICES = (@(
 		"RemoteAccess"
 		"RemoteRegistry"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		### TASKS ###
 		$global:BLACKLIST_TASKS = (@(
 		"Microsoft Compatibility Appraiser"
 		"Proxy"
@@ -31,6 +33,7 @@
 		"OneDrive"
 		"XblGameSaveTask"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		### FEATURES ###
 		$global:BLACKLIST_FEATURES = (@(
 		"Printing"
 		"SearchEngine"
@@ -44,6 +47,7 @@
 		"WorkFolders"
 		"PowerShellV2"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		### CAPABILITIES ###
 		$global:BLACKLIST_CAPABILITIES = (@(
 		"StepsRecorder"
 		"QuickAssist"
@@ -56,6 +60,7 @@
 		"OpenSSH"
         "Print"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		### STARTUP ###
 		$global:BLACKLIST_STARTUP = (@(
 		"OneDrive"
 		"Java"
@@ -63,7 +68,6 @@
 		"Epic"
 		"Discord"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		# End of lists customization
 $WarningPreference = "SilentlyContinue"
 function Check
 {
