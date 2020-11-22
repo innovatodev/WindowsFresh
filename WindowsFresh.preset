@@ -24,7 +24,7 @@ DisableDefenderCloud #EnableDefenderCloud
 DisableDefenderAppGuard #EnableDefenderAppGuard
 HideAccountProtectionWarn #ShowAccountProtectionWarn
 DisableDownloadBlocking #EnableDownloadBlocking
-DisableScriptHost #EnableScriptHost 
+DisableScriptHost #EnableScriptHost
 EnableFirewall #DisableFirewall
 DisableSmartScreen #EnableSmartScreen
 DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
@@ -105,8 +105,8 @@ HidePicturesInThisPC #ShowPicturesInThisPC
 HideVideosInThisPC #ShowVideosInThisPC
 Hide3DObjectsInThisPC #Show3DObjectsInThisPC
 ShowDesktopInExplorer #HideDesktopInExplorer
-ShowDocumentsInExplorer #HideDocumentsInExplorer 
-ShowDownloadsInExplorer #HideDownloadsInExplorer 
+ShowDocumentsInExplorer #HideDocumentsInExplorer
+ShowDownloadsInExplorer #HideDownloadsInExplorer
 ShowMusicInExplorer #HideMusicInExplorer
 ShowPicturesInExplorer #HidePicturesInExplorer
 ShowVideosInExplorer #HideVideosInExplorer
@@ -139,7 +139,7 @@ SetExplorerThisPC #SetExplorerQuickAccess
 ShowQuickAccess #HideQuickAccess
 ShowDesktopIcons #HideDesktopIcons
 HideBuildNumberOnDesktop #ShowBuildNumberOnDesktop
-EnableThumbnails #DisableThumbnails 
+EnableThumbnails #DisableThumbnails
 DisableThumbnailCache #EnableThumbnailCache
 DisableThumbsDBOnNetwork #EnableThumbsDBOnNetwork
 DisableActionCenter #EnableActionCenter
@@ -171,7 +171,7 @@ DisableTitleBarColor #EnableTitleBarColor
 SetAppsDarkMode #SetAppsLightMode
 SetSystemDarkMode #SetSystemLightMode
 RemoveENKeyboard #AddENKeyboard
-EnableNumlock #DisableNumlock 
+EnableNumlock #DisableNumlock
 DisableEnhPointerPrecision #EnableEnhPointerPrecision
 EnableVerboseStatus #DisableVerboseStatus
 DisableF1HelpKey #EnableF1HelpKey
@@ -185,7 +185,7 @@ HidePrintCMDContext #ShowPrintCMDContext
 ShowSendToContext #HideSendToContext
 HideBitLockerContext #ShowBitLockerContext
 HideBitmapNewContext #ShowBitmapNewContext
-RemoveCompatibillityContext #AddCompatibillityContext 
+RemoveCompatibillityContext #AddCompatibillityContext
 HideRichTextDocumentNewContext #ShowRichTextDocumentNewContext
 HideCompressedFolderNewContext #ShowCompressedFolderNewContext
 HidePreviousVersionsPage #ShowPreviousVersionsPage

@@ -44,7 +44,7 @@ Function DisableServices
 	Write-Output "DisableServices"
 	$BLACKLIST = (@(
 		"RemoteAccess"
-		"RemoteRegistry"	
+		"RemoteRegistry"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
     Get-Service | Where-Object { $_.Name -Match $BLACKLIST } | Where-Object { $_.StartType -notlike 'Disabled' } | Set-Service -StartupType Disabled | Out-Null
 }
@@ -54,7 +54,7 @@ Function DisableTasks
 	Write-Output "DisableTasks"
 	$BLACKLIST = (@(
 		"Microsoft Compatibility Appraiser"
-		"Proxy"	
+		"Proxy"
 		"Consolidator"
 		"Microsoft-Windows-DiskDiagnosticDataCollector"
 		"GatherNetworkInfo"
@@ -70,7 +70,7 @@ Function DisableFeatures
 	Write-Output "DisableFeatures"
 	$BLACKLIST = (@(
 		"Printing"
-		"SearchEngine"	
+		"SearchEngine"
 		"MSRDC-Infrastructure"
 		"WCF-Services45"
 		"WCF-TCP-PortSharing45"
@@ -90,7 +90,7 @@ Function DisableCapabilities
 	$BLACKLIST = (@(
 		"StepsRecorder"
 		"QuickAssist"
-		"InternetExplorer"	
+		"InternetExplorer"
 		"Hello.Face"
 		"MathRecognizer"
 		"WindowsMediaPlayer"
@@ -430,7 +430,7 @@ Function HideVideosInThisPC
 	Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}" -Recurse -ErrorAction SilentlyContinue | Out-Null
 }
 # Show Videos icon in This PC
-Function ShowVideosInThisPC 
+Function ShowVideosInThisPC
 {
 	Write-Output "ShowVideosInThisPC"
 	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}")) {
@@ -3335,7 +3335,7 @@ Function ShowEditWithPaint3DContext
 {
 	Write-Output "ShowEditWithPaint3DContext"
 	$Extensions = @(".bmp", ".gif", ".jpe", ".jpeg", ".jpg", ".png", ".tif", ".tiff")
-	foreach ($Extension in $Extensions)	
+	foreach ($Extension in $Extensions)
 	{
 		if ((Test-Path -Path "HKCR:\SystemFileAssociations\$Extension\Shell\3D Edit"))
 		{
@@ -3802,24 +3802,18 @@ Function DesktopIconSizeSmall
 {
 	Write-Output "DesktopIconSizeSmall"
 	Set-ItemProperty -path "HKCU:\Software\Microsoft\Windows\Shell\Bags\1\Desktop" -name IconSize -value 32 | Out-Null
-	taskkill /f /im explorer.exe | Out-Null
-	Start-Process explorer | Out-Null
 }
 # Set Desktop icons to medium size
 Function DesktopIconSizeMedium
 {
 	Write-Output "DesktopIconSizeMedium"
 	Set-ItemProperty -path "HKCU:\Software\Microsoft\Windows\Shell\Bags\1\Desktop" -name IconSize -value 48 | Out-Null
-	taskkill /f /im explorer.exe | Out-Null
-	Start-Process explorer | Out-Null
 }
 # Set Desktop icons to large size
 Function DesktopIconSizeLarge
 {
 	Write-Output "DesktopIconSizeLarge"
 	Set-ItemProperty -path "HKCU:\Software\Microsoft\Windows\Shell\Bags\1\Desktop" -name IconSize -value 96 | Out-Null
-	taskkill /f /im explorer.exe | Out-Null
-	Start-Process explorer | Out-Null
 }
 # Delete all Windows Firewall rules
 Function FirewallDeleteAllRules
@@ -3835,7 +3829,7 @@ Function BlockMicrosoftAccount
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Force | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount" -Name "DisableUserAuth" -Type DWord -Value 1 | Out-Null
-	
+
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\System")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\System" -Force | Out-Null
 	}

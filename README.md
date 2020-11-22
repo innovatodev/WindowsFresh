@@ -1,4 +1,4 @@
-# WindowsFresh  
+# WindowsFresh
 ## PowerShell Script for automated Windows 10 configuration.
 
 Recommended to run on a fresh Windows installation, not really mandatory but it could cause some problems if current install is already tweaked by other methods.
@@ -12,7 +12,7 @@ And if you reinstall Windows, do it with a clean ISO provided by microsoft (Down
 
 The script functionnalities are :
 
-- ###  __Uninstall UWP Apps (WHITELIST)__ 
+- ###  __Uninstall UWP Apps (WHITELIST)__
 
 Remove all UWP bloat by default, the whitelist can be customized as well and not useless UWP Apps like Camera, Photos, Calculator and Microsoft Store are not uninstalled by default, they are in the tweak preset file.
 
