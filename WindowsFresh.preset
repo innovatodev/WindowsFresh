@@ -225,6 +225,8 @@ DisableSleepButton #EnableSleepButton
 DisableSleepTimeout #EnableSleepTimeout
 DisableFastStartup #EnableFastStartup
 DisableAutoRebootOnCrash #EnableAutoRebootOnCrash
+HideLogOffOptions #ShowLogOffOptions
+HideLockSessionOptions #ShowLockSessionOptions
 
 ### NETWORK ###
 SetCurrentNetworkPublic #SetCurrentNetworkPrivate
