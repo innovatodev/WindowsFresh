@@ -3885,8 +3885,6 @@ Function ShowLockSessionOptions
  Write-Output "ShowLockSessionOptions"
  	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableLockWorkstation" -ErrorAction SilentlyContinue
 }
-
-
 Function WaitForKey
 {
 	Write-Output "Press any key to continue"
