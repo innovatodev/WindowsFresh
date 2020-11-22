@@ -1,4 +1,5 @@
-        $global:WHITELIST_UWP = (@(
+        #Add or remove entries here (One per line, do not touch anything else)
+		$global:WHITELIST_UWP = (@(
 		"549981C3F5F10"
 		"Windows.Photo"
 		"WindowsCalculator"
@@ -62,6 +63,7 @@
 		"Epic"
 		"Discord"
 		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+		# End of lists customization
 $WarningPreference = "SilentlyContinue"
 function Check
 {
