@@ -3846,5 +3846,5 @@ Function WaitForKey
 {
 	Write-Output "Press any key to continue"
 	[Console]::ReadKey($true) | Out-Null
-	#Restart-Computer
+	Restart-Computer
 }
