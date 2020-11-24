@@ -2210,28 +2210,13 @@ Function EnableFirewall
 Function HideDefenderTrayIcon
 {
 	Write-Output "HideDefenderTrayIcon"
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" -Force
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" -Name "HideSystray" -Type DWord -Value 1
-	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
-		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -ErrorAction SilentlyContinue
-	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
 		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -ErrorAction SilentlyContinue
-	}
 }
 # Show Windows Defender SysTray icon
 Function ShowDefenderTrayIcon
 {
 	Write-Output "ShowDefenderTrayIcon"
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" -Name "HideSystray" -ErrorAction SilentlyContinue
-	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -Type ExpandString -Value "`"%ProgramFiles%\Windows Defender\MSASCuiL.exe`""
-	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063 -And [System.Environment]::OSVersion.Version.Build -le 17134) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%ProgramFiles%\Windows Defender\MSASCuiL.exe"
-	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 17763) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%windir%\system32\SecurityHealthSystray.exe"
-	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%windir%\system32\SecurityHealthSystray.exe"
 }
 # Disable Windows Defender Cloud
 Function DisableDefenderCloud
@@ -2289,6 +2274,26 @@ Function ShowAccountProtectionWarn
 	Write-Output "ShowAccountProtectionWarn"
 	Remove-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AccountProtection_MicrosoftAccount_Disconnected" -ErrorAction SilentlyContinue
 }
+# Hide SmartScreen warnings in Defender when not using it
+Function HideSmartScreenWarn
+{
+	Write-Output "HideSmartScreenWarn"
+	If (!(Test-Path "HKCU:\Software\Microsoft\Windows Security Health\State")) {
+		New-Item -Path "HKCU:\Software\Microsoft\Windows Security Health\State" -Force
+	}
+	Set-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_EdgeSmartScreenOff" -Type DWord -Value 0
+	Set-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_PuaSmartScreenOff" -Type DWord -Value 0
+	Set-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_StoreAppsSmartScreenOff" -Type DWord -Value 0
+}
+# Show SmartScreen warnings in Defender when not using it
+Function ShowSmartScreenWarn
+{
+	Write-Output "ShowSmartScreenWarn"
+	Remove-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_EdgeSmartScreenOff" -ErrorAction SilentlyContinue
+	Remove-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_PuaSmartScreenOff" -ErrorAction SilentlyContinue
+	Remove-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AppAndBrowser_StoreAppsSmartScreenOff" -ErrorAction SilentlyContinue
+}
+
 # Disable blocking of downloaded files
 Function DisableDownloadBlocking
 {

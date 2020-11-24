@@ -2,12 +2,12 @@ RequireAdmin
 Check
 
 ### APPLICATIONS ###
-UninstallUWP
-DisableServices
-DisableTasks
-DisableFeatures
-DisableCapabilities
-RemoveStartup
+#UninstallUWP
+#DisableServices
+#DisableTasks
+#DisableFeatures
+#DisableCapabilities
+#RemoveStartup
 #UnpinStartMenu
 #DisableCortana #EnableCortana
 #DisableOneDrive #EnableOneDrive
@@ -19,21 +19,22 @@ RemoveStartup
 #DisableXboxFeatures #EnableXboxFeatures
 
 ### SECURITY ###
-#SetUACHigh #SetUACLow
-#DisableDefenderCloud #EnableDefenderCloud
-#DisableDefenderAppGuard #EnableDefenderAppGuard
-#HideAccountProtectionWarn #ShowAccountProtectionWarn
-#DisableDownloadBlocking #EnableDownloadBlocking
-#DisableScriptHost #EnableScriptHost
-#EnableFirewall #DisableFirewall
-#DisableSmartScreen #EnableSmartScreen
-#DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
-#DisablePUAppsDetection #EnablePUAppsDetection
-#DisableDefenderSandbox #EnableDefenderSandbox
-#DefaultMitigations #DisableMitigations
-#SetDEPOptIn #SetDEPOptOut
+SetUACHigh #SetUACLow
+DisableDefenderCloud #EnableDefenderCloud
+DisableDefenderAppGuard #EnableDefenderAppGuard
+HideAccountProtectionWarn #ShowAccountProtectionWarn
+HideSmartScreenWarn #ShowSmartScreenWarn
+DisableDownloadBlocking #EnableDownloadBlocking
+DisableScriptHost #EnableScriptHost
+EnableFirewall #DisableFirewall
+DisableSmartScreen #EnableSmartScreen
+DisableExploitGuardNetworkProtection #EnableExploitGuardNetworkProtection
+DisablePUAppsDetection #EnablePUAppsDetection
+DisableDefenderSandbox #EnableDefenderSandbox
+DefaultMitigations #DisableMitigations
+SetDEPOptIn #SetDEPOptOut
 #FirewallDeleteAllRules
-#ShowDefenderTrayIcon #HideDefenderTrayIcon
+ShowDefenderTrayIcon #HideDefenderTrayIcon
 #EnableRestorePoints #DisableRestorePoints
 
 ### UPDATES ###
