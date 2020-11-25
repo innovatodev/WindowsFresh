@@ -1,74 +1,74 @@
-        #### UWP Apps ###
-		$global:WHITELIST_UWP = (@(
-		"549981C3F5F10"
-		"Windows.Photo"
-		"WindowsCalculator"
-		"WindowsCamera"
-		"GamingApp"
-		"GamingServices"
-		"Xbox"
-		"DesktopAppInstaller"
-		"StorePurchaseApp"
-		"WindowsStore"
-		"WebMediaExtensions"
-		"Nvidia"
-		"IntelGraphics"
-		"Nahimic"
-		"AdvancedMicroDevicesInc"
-		"Realtek"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		### SERVICES ###
-		$global:BLACKLIST_SERVICES = (@(
-		"RemoteAccess"
-		"RemoteRegistry"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		### TASKS ###
-		$global:BLACKLIST_TASKS = (@(
-		"Microsoft Compatibility Appraiser"
-		"Proxy"
-		"Consolidator"
-		"Microsoft-Windows-DiskDiagnosticDataCollector"
-		"GatherNetworkInfo"
-		"Edge"
-		"OneDrive"
-		"XblGameSaveTask"
-		"BackgroundDownload"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		### FEATURES ###
-		$global:BLACKLIST_FEATURES = (@(
-		"Printing"
-		"SearchEngine"
-		"MSRDC-Infrastructure"
-		"WCF-Services45"
-		"WCF-TCP-PortSharing45"
-		"MediaPlayback"
-		"WindowsMediaPlayer"
-		"SmbDirect"
-		"Internet-Explorer"
-		"WorkFolders"
-		"PowerShellV2"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		### CAPABILITIES ###
-		$global:BLACKLIST_CAPABILITIES = (@(
-		"StepsRecorder"
-		"QuickAssist"
-		"InternetExplorer"
-		"Hello.Face"
-		"MathRecognizer"
-		"WindowsMediaPlayer"
-		"WordPad"
-		"OneSync"
-		"OpenSSH"
-        "Print"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
-		### STARTUP ###
-		$global:BLACKLIST_STARTUP = (@(
-		"OneDrive"
-		"Java"
-		"Steam"
-		"Epic"
-		"Discord"
-		) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+#### UWP Apps ###
+$global:WHITELIST_UWP = (@(
+"549981C3F5F10"
+"Windows.Photo"
+"WindowsCalculator"
+"WindowsCamera"
+"GamingApp"
+"GamingServices"
+"Xbox"
+"DesktopAppInstaller"
+"StorePurchaseApp"
+"WindowsStore"
+"WebMediaExtensions"
+"Nvidia"
+"IntelGraphics"
+"Nahimic"
+"AdvancedMicroDevicesInc"
+"Realtek"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+### SERVICES ###
+$global:BLACKLIST_SERVICES = (@(
+"RemoteAccess"
+"RemoteRegistry"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+### TASKS ###
+$global:BLACKLIST_TASKS = (@(
+"Microsoft Compatibility Appraiser"
+"Proxy"
+"Consolidator"
+"Microsoft-Windows-DiskDiagnosticDataCollector"
+"GatherNetworkInfo"
+"Edge"
+"OneDrive"
+"XblGameSaveTask"
+"BackgroundDownload"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+### FEATURES ###
+$global:BLACKLIST_FEATURES = (@(
+"Printing"
+"SearchEngine"
+"MSRDC-Infrastructure"
+"WCF-Services45"
+"WCF-TCP-PortSharing45"
+"MediaPlayback"
+"WindowsMediaPlayer"
+"SmbDirect"
+"Internet-Explorer"
+"WorkFolders"
+"PowerShellV2"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+### CAPABILITIES ###
+$global:BLACKLIST_CAPABILITIES = (@(
+"StepsRecorder"
+"QuickAssist"
+"InternetExplorer"
+"Hello.Face"
+"MathRecognizer"
+"WindowsMediaPlayer"
+"WordPad"
+"OneSync"
+"OpenSSH"
+"Print"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
+### STARTUP ###
+$global:BLACKLIST_STARTUP = (@(
+"OneDrive"
+"Java"
+"Steam"
+"Epic"
+"Discord"
+) | ForEach-Object { [Regex]::Escape($_) }) -join '|'
 $WarningPreference = "SilentlyContinue"
 function Check
 {
